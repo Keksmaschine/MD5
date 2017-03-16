@@ -27,7 +27,7 @@ struct MD5_Context
  * @param	Context	MD5_Context structure to initialize
  * @return			TRUE if successfull, otherwise FALSE
  */
-BOOLEAN MD5_Init(MD5_Context* Context);
+BOOLEAN MD5_Init(struct MD5_Context* Context);
 
 /**
  * Hashes data in order to calculate and MD5 hash.
@@ -36,14 +36,14 @@ BOOLEAN MD5_Init(MD5_Context* Context);
  * @param	BufSize	Size of the buffer Buf
  * @return			TRUE if successfull, otherwise FALSE
  */
-BOOLEAN MD5_Update(MD5_Context* Context, const PBYTE Buf, DWORD BufSize);
+BOOLEAN MD5_Update(struct MD5_Context* Context, const PBYTE Buf, DWORD BufSize);
 
 /**
  * Finalizes the MD5 hash.
  * @param	Context	MD5_Context structure
  * @return			TRUE if successfull, otherwise FALSE
  */
-BOOLEAN MD5_Final(MD5_Context* Context);
+BOOLEAN MD5_Final(struct MD5_Context* Context);
 
 /**
  * Calculates an MD5 hash of a buffer in one pass.

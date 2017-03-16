@@ -8,7 +8,7 @@
 #include <Wincrypt.h>
 
 
-BOOLEAN MD5_Init(MD5_Context* Context)
+BOOLEAN MD5_Init(struct MD5_Context* Context)
 {
 	if (!CryptAcquireContext(&Context->hProv, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT))
 	{
@@ -22,7 +22,7 @@ BOOLEAN MD5_Init(MD5_Context* Context)
 	return TRUE;
 }
 
-BOOLEAN MD5_Update(MD5_Context* Context, const PBYTE Buf, DWORD BufSize)
+BOOLEAN MD5_Update(struct MD5_Context* Context, const PBYTE Buf, DWORD BufSize)
 {
 	if (!CryptHashData(Context->hHash, Buf, BufSize, 0))
 	{
@@ -33,7 +33,7 @@ BOOLEAN MD5_Update(MD5_Context* Context, const PBYTE Buf, DWORD BufSize)
 	return TRUE;
 }
 
-BOOLEAN MD5_Final(MD5_Context* Context)
+BOOLEAN MD5_Final(struct MD5_Context* Context)
 {
 	BOOLEAN ret = FALSE;
 	DWORD hashLen = MD5_DIGEST_SIZE;
@@ -50,8 +50,8 @@ BOOLEAN MD5_Final(MD5_Context* Context)
 
 BOOLEAN MD5_Calculate(const PBYTE Buf, DWORD BufSize, PBYTE Digest)
 {
-	MD5_Context context;
-	ZeroMemory(&context, sizeof(context);
+	struct MD5_Context context;
+	ZeroMemory(&context, sizeof(context));
 	
 	if (!Init(&context) || !Update(&context, Buf, BufSize) || !Final(&context))
 	{
